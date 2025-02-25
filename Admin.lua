@@ -57,6 +57,10 @@ BuildFolder.Name = "DIZZYs Stored Builds Folder"
 require(132343154712224).DizzySSBuildLoad() -- drift
 require(128485735875466).DizzySSBuildLoad() -- Ferrari
 require(123764473198037).DizzySSBuildLoad() -- Roblox Ball Gyro
+require(74730262689062).DizzySSBuildLoad() -- Mclaren Sienna
+require(91324836980339).DizzySSBuildLoad() -- Rimac Nevera
+require(72122600693653).DizzySSBuildLoad() -- Bugatti Bolide
+require(110485306545671).DizzySSBuildLoad() -- Koenigsegg Agera
 
 require(128010285971411).DizzySSBuildLoad() -- Treehouse
 
@@ -688,6 +692,137 @@ addcmd({
 	end
 })
 
+
+addcmd({
+	Name = "supercar2",
+	Aliases = {"mclaren", "sienna"},
+	Function = function(sender, targets, arguments)
+		local rs = game:GetService("ReplicatedStorage")
+		local dizzyFolder = rs:FindFirstChild("DIZZYs Folder")
+		local storedBuilds = dizzyFolder and dizzyFolder:FindFirstChild("DIZZYs Stored Builds Folder")
+		local supercar = storedBuilds and storedBuilds:FindFirstChild("McLarenSenna")
+
+		if not supercar then
+			local success, result = pcall(function()
+				return require(74730262689062).DizzySSBuildLoad()
+			end)
+
+			if success then
+				repeat task.wait() until rs:FindFirstChild("Supercar")
+				rs.Supercar.Parent = dizzyFolder
+				supercar = storedBuilds and storedBuilds:FindFirstChild("Supercar")
+			else
+				return notif(sender, "DIZZY's Admin", "Supercar failed to load: " .. result, Internals.Icons.Error)
+			end
+		end
+
+		if supercar then
+			local carClone = supercar:Clone()
+			carClone.PrimaryPart = carClone:FindFirstChild("DriveSeat")
+			carClone.Parent = workspace
+			carClone:SetPrimaryPartCFrame(sender.Character.HumanoidRootPart.CFrame * CFrame.new(0, -0.5, -10))
+		end
+	end
+})
+
+addcmd({
+	Name = "supercar3",
+	Aliases = {"rimac", "nevera"},
+	Function = function(sender, targets, arguments)
+		local rs = game:GetService("ReplicatedStorage")
+		local dizzyFolder = rs:FindFirstChild("DIZZYs Folder")
+		local storedBuilds = dizzyFolder and dizzyFolder:FindFirstChild("DIZZYs Stored Builds Folder")
+		local supercar = storedBuilds and storedBuilds:FindFirstChild("RmacNeveraConcept2")
+
+		if not supercar then
+			local success, result = pcall(function()
+				return require(91324836980339).DizzySSBuildLoad()
+			end)
+
+			if success then
+				repeat task.wait() until rs:FindFirstChild("Supercar")
+				rs.Supercar.Parent = dizzyFolder
+				supercar = storedBuilds and storedBuilds:FindFirstChild("Supercar")
+			else
+				return notif(sender, "DIZZY's Admin", "Supercar failed to load: " .. result, Internals.Icons.Error)
+			end
+		end
+
+		if supercar then
+			local carClone = supercar:Clone()
+			carClone.PrimaryPart = carClone:FindFirstChild("DriveSeat")
+			carClone.Parent = workspace
+			carClone:SetPrimaryPartCFrame(sender.Character.HumanoidRootPart.CFrame * CFrame.new(0, -0.5, -10))
+		end
+	end
+})
+
+addcmd({
+	Name = "supercar4",
+	Aliases = {"bugatti", "bolide"},
+	Function = function(sender, targets, arguments)
+		local rs = game:GetService("ReplicatedStorage")
+		local dizzyFolder = rs:FindFirstChild("DIZZYs Folder")
+		local storedBuilds = dizzyFolder and dizzyFolder:FindFirstChild("DIZZYs Stored Builds Folder")
+		local supercar = storedBuilds and storedBuilds:FindFirstChild("BugattiBolide")
+
+		if not supercar then
+			local success, result = pcall(function()
+				return require(72122600693653).DizzySSBuildLoad()
+			end)
+
+			if success then
+				repeat task.wait() until rs:FindFirstChild("Supercar")
+				rs.Supercar.Parent = dizzyFolder
+				supercar = storedBuilds and storedBuilds:FindFirstChild("Supercar")
+			else
+				return notif(sender, "DIZZY's Admin", "Supercar failed to load: " .. result, Internals.Icons.Error)
+			end
+		end
+
+		if supercar then
+			local carClone = supercar:Clone()
+			carClone.PrimaryPart = carClone:FindFirstChild("DriveSeat")
+			carClone.Parent = workspace
+			carClone:SetPrimaryPartCFrame(sender.Character.HumanoidRootPart.CFrame * CFrame.new(0, -0.5, -10))
+		end
+	end
+})
+
+
+addcmd({
+	Name = "supercar5",
+	Aliases = {"koenigsegg", "agera"},
+	Function = function(sender, targets, arguments)
+		local rs = game:GetService("ReplicatedStorage")
+		local dizzyFolder = rs:FindFirstChild("DIZZYs Folder")
+		local storedBuilds = dizzyFolder and dizzyFolder:FindFirstChild("DIZZYs Stored Builds Folder")
+		local supercar = storedBuilds and storedBuilds:FindFirstChild("KoenigseggAgera")
+
+		if not supercar then
+			local success, result = pcall(function()
+				return require(110485306545671).DizzySSBuildLoad()
+			end)
+
+			if success then
+				repeat task.wait() until rs:FindFirstChild("Supercar")
+				rs.Supercar.Parent = dizzyFolder
+				supercar = storedBuilds and storedBuilds:FindFirstChild("Supercar")
+			else
+				return notif(sender, "DIZZY's Admin", "Supercar failed to load: " .. result, Internals.Icons.Error)
+			end
+		end
+
+		if supercar then
+			local carClone = supercar:Clone()
+			carClone.PrimaryPart = carClone:FindFirstChild("DriveSeat")
+			carClone.Parent = workspace
+			carClone:SetPrimaryPartCFrame(sender.Character.HumanoidRootPart.CFrame * CFrame.new(0, -0.5, -10))
+		end
+	end
+})
+
+
 addcmd({
 	Name = "ball",
 	Aliases = {"gyroball", "ballcar"},
@@ -967,7 +1102,9 @@ addcmd({
 	Name = "cmds",
 	Aliases = {"commands"},
 	Function = function(sender, targets, arguments)
-
+		
+		table.sort(Internals.Commands)
+		
 		local CommandsListUI = {
 			["_CommandsGui"] = Instance.new("ScreenGui");
 			["_Frame"] = Instance.new("Frame");
@@ -992,7 +1129,7 @@ addcmd({
 		CommandsListUI["_UiCorner"].CornerRadius = UDim.new(0, 4)
 		CommandsListUI["_UiCorner"].Parent = CommandsListUI._Frame
 
-		CommandsListUI["_ScrollingFrame"].CanvasSize = UDim2.new(0, 0, 0, 530)
+		CommandsListUI["_ScrollingFrame"].CanvasSize = UDim2.new(0, 0, 0, 1500)
 		CommandsListUI["_ScrollingFrame"].ScrollBarImageColor3 = Color3.fromRGB(100, 100, 100)
 		CommandsListUI["_ScrollingFrame"].ScrollBarThickness = 2
 		CommandsListUI["_ScrollingFrame"].BackgroundTransparency = 1
