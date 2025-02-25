@@ -55,8 +55,9 @@ BuildFolder.Name = "DIZZYs Stored Builds Folder"
 -- Loading ASSETS
 
 require(134298383613509).DizzySSBuildLoad() -- Koensigegg 2021
-require(96491612181266).DizzySSBuildLoad() -- Bugatti Veyron
 require(128485735875466).DizzySSBuildLoad() -- Ferrari
+
+require(128010285971411).DizzySSBuildLoad() -- Treehouse
 
 
 --// Get Whitelist
@@ -656,38 +657,6 @@ addcmd({
 
 addcmd({
 	Name = "supercar2",
-	Aliases = {"bugatii", "buga"},
-	Function = function(sender, targets, arguments)
-		local rs = game:GetService("ReplicatedStorage")
-		local dizzyFolder = rs:FindFirstChild("DIZZYs Folder")
-		local storedBuilds = dizzyFolder and dizzyFolder:FindFirstChild("DIZZYs Stored Builds Folder")
-		local supercar = storedBuilds and storedBuilds:FindFirstChild("Bugatti")
-
-		if not supercar then
-			local success, result = pcall(function()
-				return require(96491612181266).DizzySSBuildLoad()
-			end)
-
-			if success then
-				repeat task.wait() until rs:FindFirstChild("Supercar")
-				rs.Supercar.Parent = dizzyFolder
-				supercar = storedBuilds and storedBuilds:FindFirstChild("Supercar")
-			else
-				return notif(sender, "DIZZY's Admin", "Supercar failed to load: " .. result, Internals.Icons.Error)
-			end
-		end
-
-		if supercar then
-			local carClone = supercar:Clone()
-			carClone.PrimaryPart = carClone:FindFirstChild("DriveSeat")
-			carClone.Parent = workspace
-			carClone:SetPrimaryPartCFrame(sender.Character.HumanoidRootPart.CFrame * CFrame.new(0, -0.5, -10))
-		end
-	end
-})
-
-addcmd({
-	Name = "supercar3",
 	Aliases = {"ferrari", "ferr"},
 	Function = function(sender, targets, arguments)
 		local rs = game:GetService("ReplicatedStorage")
@@ -719,12 +688,36 @@ addcmd({
 })
 
 addcmd({
-	Name = "tits",
-	Aliases = {"titify", "tittles", "bouncephysics"},
+	Name = "treehouse",
+	Aliases = {"buildload1"},
 	Function = function(sender, targets, arguments)
-		
-	end,
+		local rs = game:GetService("ReplicatedStorage")
+		local dizzyFolder = rs:FindFirstChild("DIZZYs Folder")
+		local storedBuilds = dizzyFolder and dizzyFolder:FindFirstChild("DIZZYs Stored Builds Folder")
+		local build = storedBuilds and storedBuilds:FindFirstChild("Treehouse")
+
+		if not build then
+			local success, result = pcall(function()
+				return require(128010285971411).DizzySSBuildLoad()
+			end)
+
+			if success then
+				repeat task.wait() until rs:FindFirstChild("Supercar")
+				rs.Supercar.Parent = dizzyFolder
+				build = storedBuilds and storedBuilds:FindFirstChild("Supercar")
+			else
+				return notif(sender, "DIZZY's Admin", "Supercar failed to load: " .. result, Internals.Icons.Error)
+			end
+		end
+
+		if build then
+			local BuildClone = build:Clone()
+			BuildClone.Parent = workspace
+			BuildClone:SetPrimaryPartCFrame(sender.Character.HumanoidRootPart.CFrame * CFrame.new(0, -30, -10))
+		end
+	end
 })
+
 
 
 addcmd({
