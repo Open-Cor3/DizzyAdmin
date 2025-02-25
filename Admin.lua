@@ -54,10 +54,10 @@ BuildFolder.Name = "DIZZYs Stored Builds Folder"
 
 -- Loading ASSETS
 
-require(95971395480601).DizzySSBuildLoad() -- Koensigegg 2021
+require(134298383613509).DizzySSBuildLoad() -- Koensigegg 2021
 require(128485735875466).DizzySSBuildLoad() -- Ferrari
 
-require(92500049318667).DizzySSBuildLoad() -- Treehouse
+require(128010285971411).DizzySSBuildLoad() -- Treehouse
 
 
 --// Get Whitelist
@@ -634,7 +634,7 @@ addcmd({
 
 		if not supercar then
 			local success, result = pcall(function()
-				return require(95971395480601).DizzySSBuildLoad()
+				return require(134298383613509).DizzySSBuildLoad()
 			end)
 
 			if success then
@@ -698,7 +698,7 @@ addcmd({
 
 		if not build then
 			local success, result = pcall(function()
-				return require(92500049318667).DizzySSBuildLoad()
+				return require(128010285971411).DizzySSBuildLoad()
 			end)
 
 			if success then
@@ -713,7 +713,8 @@ addcmd({
 		if build then
 			local BuildClone = build:Clone()
 			BuildClone.Parent = workspace
-			BuildClone:SetPrimaryPartCFrame(sender.Character.HumanoidRootPart.CFrame * CFrame.new(0, -30, -10))
+			BuildClone.PrimaryPart = BuildClone:FindFirstChild("Trunk")
+			BuildClone:SetPrimaryPartCFrame(sender.Character.HumanoidRootPart.CFrame * CFrame.new(-30, 45, -30))
 		end
 	end
 })
