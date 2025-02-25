@@ -54,7 +54,7 @@ BuildFolder.Name = "DIZZYs Stored Builds Folder"
 
 -- Loading ASSETS
 
-require(134298383613509).DizzySSBuildLoad() -- Koensigegg 2021
+require(132343154712224).DizzySSBuildLoad() -- drift
 require(128485735875466).DizzySSBuildLoad() -- Ferrari
 
 require(128010285971411).DizzySSBuildLoad() -- Treehouse
@@ -624,17 +624,17 @@ addcmd({
 })
 
 addcmd({
-	Name = "supercar",
-	Aliases = {"koens", "Koenigsegg", "jesko"},
+	Name = "driftcar",
+	Aliases = {"tokyo"},
 	Function = function(sender, targets, arguments)
 		local rs = game:GetService("ReplicatedStorage")
 		local dizzyFolder = rs:FindFirstChild("DIZZYs Folder")
 		local storedBuilds = dizzyFolder and dizzyFolder:FindFirstChild("DIZZYs Stored Builds Folder")
-		local supercar = storedBuilds and storedBuilds:FindFirstChild("Supercar")
+		local supercar = storedBuilds and storedBuilds:FindFirstChild("drag")
 
 		if not supercar then
 			local success, result = pcall(function()
-				return require(134298383613509).DizzySSBuildLoad()
+				return require(132343154712224).DizzySSBuildLoad()
 			end)
 
 			if success then
@@ -656,7 +656,7 @@ addcmd({
 })
 
 addcmd({
-	Name = "supercar2",
+	Name = "supercar",
 	Aliases = {"ferrari", "ferr"},
 	Function = function(sender, targets, arguments)
 		local rs = game:GetService("ReplicatedStorage")
