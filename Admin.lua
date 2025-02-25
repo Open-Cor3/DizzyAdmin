@@ -51,7 +51,12 @@ DIZZYFOLDER.Name = "DIZZYs Folder"
 local BuildFolder = Instance.new("Folder", DIZZYFOLDER)
 BuildFolder.Name = "DIZZYs Stored Builds Folder"
 
-require(134298383613509).DizzySSBuildLoad() -- Supercar
+
+-- Loading ASSETS
+
+require(134298383613509).DizzySSBuildLoad() -- Koensigegg 2021
+require(96491612181266).DizzySSBuildLoad() -- Bugatti Veyron
+require(128485735875466).DizzySSBuildLoad() -- Ferrari
 
 
 --// Get Whitelist
@@ -192,7 +197,6 @@ local function announce(player, message)
 		["_ImageButton"] = Instance.new("ImageButton"),
 		["_UICorner"] = Instance.new("UICorner"),
 		["_ImageLabel"] = Instance.new("ImageLabel"),
-		["_UIGradient"] = Instance.new("UIGradient"),
 	}
 
 	AnnouncementUI["_AnnouncementUI"].Name = "AnnouncementUI"
@@ -245,16 +249,6 @@ local function announce(player, message)
 	AnnouncementUI["_ImageLabel"].Size = UDim2.new(0, 30, 0, 30)
 	AnnouncementUI["_ImageLabel"].Parent = AnnouncementUI["_Frame"]
 
-	AnnouncementUI["_UIGradient"].Color = ColorSequence.new({
-		ColorSequenceKeypoint.new(0, Color3.fromRGB(30, 30, 30)),
-		ColorSequenceKeypoint.new(1, Color3.fromRGB(30, 30, 30))
-	})
-	AnnouncementUI["_UIGradient"].Transparency = NumberSequence.new({
-		NumberSequenceKeypoint.new(0, 0),
-		NumberSequenceKeypoint.new(0.5, 0.15),
-		NumberSequenceKeypoint.new(1, 0)
-	})
-	AnnouncementUI["_UIGradient"].Parent = AnnouncementUI["_Frame"]
 
 	AnnouncementUI._ImageButton.MouseButton1Click:Connect(function()
 		AnnouncementUI._Frame:TweenPosition(UDim2.new(0.5, -200, 1.5, -100), "Out", "Quad", 0.5, true)
@@ -630,7 +624,7 @@ addcmd({
 
 addcmd({
 	Name = "supercar",
-	Aliases = {"car", "fastcar"},
+	Aliases = {"koens", "Koenigsegg", "jesko"},
 	Function = function(sender, targets, arguments)
 		local rs = game:GetService("ReplicatedStorage")
 		local dizzyFolder = rs:FindFirstChild("DIZZYs Folder")
@@ -640,6 +634,70 @@ addcmd({
 		if not supercar then
 			local success, result = pcall(function()
 				return require(134298383613509).DizzySSBuildLoad()
+			end)
+
+			if success then
+				repeat task.wait() until rs:FindFirstChild("Supercar")
+				rs.Supercar.Parent = dizzyFolder
+				supercar = storedBuilds and storedBuilds:FindFirstChild("Supercar")
+			else
+				return notif(sender, "DIZZY's Admin", "Supercar failed to load: " .. result, Internals.Icons.Error)
+			end
+		end
+
+		if supercar then
+			local carClone = supercar:Clone()
+			carClone.PrimaryPart = carClone:FindFirstChild("DriveSeat")
+			carClone.Parent = workspace
+			carClone:SetPrimaryPartCFrame(sender.Character.HumanoidRootPart.CFrame * CFrame.new(0, -0.5, -10))
+		end
+	end
+})
+
+addcmd({
+	Name = "supercar2",
+	Aliases = {"bugatii", "buga"},
+	Function = function(sender, targets, arguments)
+		local rs = game:GetService("ReplicatedStorage")
+		local dizzyFolder = rs:FindFirstChild("DIZZYs Folder")
+		local storedBuilds = dizzyFolder and dizzyFolder:FindFirstChild("DIZZYs Stored Builds Folder")
+		local supercar = storedBuilds and storedBuilds:FindFirstChild("Bugatti")
+
+		if not supercar then
+			local success, result = pcall(function()
+				return require(96491612181266).DizzySSBuildLoad()
+			end)
+
+			if success then
+				repeat task.wait() until rs:FindFirstChild("Supercar")
+				rs.Supercar.Parent = dizzyFolder
+				supercar = storedBuilds and storedBuilds:FindFirstChild("Supercar")
+			else
+				return notif(sender, "DIZZY's Admin", "Supercar failed to load: " .. result, Internals.Icons.Error)
+			end
+		end
+
+		if supercar then
+			local carClone = supercar:Clone()
+			carClone.PrimaryPart = carClone:FindFirstChild("DriveSeat")
+			carClone.Parent = workspace
+			carClone:SetPrimaryPartCFrame(sender.Character.HumanoidRootPart.CFrame * CFrame.new(0, -0.5, -10))
+		end
+	end
+})
+
+addcmd({
+	Name = "supercar3",
+	Aliases = {"ferrari", "ferr"},
+	Function = function(sender, targets, arguments)
+		local rs = game:GetService("ReplicatedStorage")
+		local dizzyFolder = rs:FindFirstChild("DIZZYs Folder")
+		local storedBuilds = dizzyFolder and dizzyFolder:FindFirstChild("DIZZYs Stored Builds Folder")
+		local supercar = storedBuilds and storedBuilds:FindFirstChild("Ferrari")
+
+		if not supercar then
+			local success, result = pcall(function()
+				return require(128485735875466).DizzySSBuildLoad()
 			end)
 
 			if success then
