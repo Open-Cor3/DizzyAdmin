@@ -56,6 +56,7 @@ BuildFolder.Name = "DIZZYs Stored Builds Folder"
 
 require(132343154712224).DizzySSBuildLoad() -- drift
 require(128485735875466).DizzySSBuildLoad() -- Ferrari
+require(123764473198037).DizzySSBuildLoad() -- Roblox Ball Gyro
 
 require(128010285971411).DizzySSBuildLoad() -- Treehouse
 
@@ -203,7 +204,7 @@ local function announce(player, message)
 	AnnouncementUI["_AnnouncementUI"].Name = "AnnouncementUI"
 	AnnouncementUI["_AnnouncementUI"].Parent = player:WaitForChild("PlayerGui")
 
-	AnnouncementUI["_Frame"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	AnnouncementUI["_Frame"].BackgroundColor3 = Color3.fromRGB(20,20,20)
 	AnnouncementUI["_Frame"].BorderSizePixel = 0
 	AnnouncementUI["_Frame"].ClipsDescendants = true
 	AnnouncementUI["_Frame"].Position = UDim2.new(0.5, -200, 1.5, -100)
@@ -642,7 +643,7 @@ addcmd({
 				rs.Supercar.Parent = dizzyFolder
 				supercar = storedBuilds and storedBuilds:FindFirstChild("Supercar")
 			else
-				return notif(sender, "DIZZY's Admin", "Supercar failed to load: " .. result, Internals.Icons.Error)
+				return notif(sender, "DIZZY's Admin", "Driftcar failed to load: " .. result, Internals.Icons.Error)
 			end
 		end
 
@@ -688,6 +689,39 @@ addcmd({
 })
 
 addcmd({
+	Name = "ball",
+	Aliases = {"gyroball", "ballcar"},
+	Function = function(sender, targets, arguments)
+		local rs = game:GetService("ReplicatedStorage")
+		local dizzyFolder = rs:FindFirstChild("DIZZYs Folder")
+		local storedBuilds = dizzyFolder and dizzyFolder:FindFirstChild("DIZZYs Stored Builds Folder")
+		local supercar = storedBuilds and storedBuilds:FindFirstChild("Ball")
+
+		if not supercar then
+			local success, result = pcall(function()
+				return require(123764473198037).DizzySSBuildLoad() -- Roblox Ball Gyro
+			end)
+
+			if success then
+				repeat task.wait() until rs:FindFirstChild("Supercar")
+				rs.Supercar.Parent = dizzyFolder
+				supercar = storedBuilds and storedBuilds:FindFirstChild("Supercar")
+			else
+				return notif(sender, "DIZZY's Admin", "Ball Gyro failed to load: " .. result, Internals.Icons.Error)
+			end
+		end
+
+		if supercar then
+			local carClone = supercar:Clone()
+			carClone.PrimaryPart = carClone:FindFirstChild("DriverSeat")
+			carClone.Parent = workspace
+			carClone:SetPrimaryPartCFrame(sender.Character.HumanoidRootPart.CFrame * CFrame.new(0, -0.5, -10))
+		end
+	end
+})
+
+
+addcmd({
 	Name = "treehouse",
 	Aliases = {"buildload1"},
 	Function = function(sender, targets, arguments)
@@ -706,7 +740,7 @@ addcmd({
 				rs.Supercar.Parent = dizzyFolder
 				build = storedBuilds and storedBuilds:FindFirstChild("Supercar")
 			else
-				return notif(sender, "DIZZY's Admin", "Supercar failed to load: " .. result, Internals.Icons.Error)
+				return notif(sender, "DIZZY's Admin", "Treehouse failed to load: " .. result, Internals.Icons.Error)
 			end
 		end
 
