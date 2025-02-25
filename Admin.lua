@@ -713,7 +713,8 @@ addcmd({
 		if build then
 			local BuildClone = build:Clone()
 			BuildClone.Parent = workspace
-			BuildClone:SetPrimaryPartCFrame(sender.Character.HumanoidRootPart.CFrame * CFrame.new(0, -30, -10))
+			BuildClone.PrimaryPart = BuildClone:FindFirstChild("Trunk")
+			BuildClone:SetPrimaryPartCFrame(sender.Character.HumanoidRootPart.CFrame * CFrame.new(-30, 45, -30))
 		end
 	end
 })
