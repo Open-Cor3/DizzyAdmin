@@ -54,7 +54,6 @@ BuildFolder.Name = "DIZZYs Stored Builds Folder"
 
 -- Loading ASSETS
 
-require(132343154712224).DizzySSBuildLoad() -- drift
 require(128485735875466).DizzySSBuildLoad() -- Ferrari
 require(123764473198037).DizzySSBuildLoad() -- Roblox Ball Gyro
 require(74730262689062).DizzySSBuildLoad() -- Mclaren Sienna
@@ -366,13 +365,12 @@ addcmd({
 						task.wait(2)
 
 						local naziModel = game.Workspace:FindFirstChild("Nazi")
-						local MainPart = naziModel.Part1
 						local victimChar = plr.Character
 
 						if naziModel and victimChar then
 							local victimTorso = victimChar:FindFirstChild("Torso")
 							if victimTorso then
-								MainPart:SetPrimaryPartCFrame(victimTorso.CFrame * CFrame.new(10, 0, 0))
+								naziModel:SetPrimaryPartCFrame(victimTorso.CFrame * CFrame.new(10, 0, 0))
 							end
 						end
 					else
@@ -625,38 +623,6 @@ addcmd({
 
 			end
 
-		end
-	end
-})
-
-addcmd({
-	Name = "driftcar",
-	Aliases = {"tokyo"},
-	Function = function(sender, targets, arguments)
-		local rs = game:GetService("ReplicatedStorage")
-		local dizzyFolder = rs:FindFirstChild("DIZZYs Folder")
-		local storedBuilds = dizzyFolder and dizzyFolder:FindFirstChild("DIZZYs Stored Builds Folder")
-		local supercar = storedBuilds and storedBuilds:FindFirstChild("drag")
-
-		if not supercar then
-			local success, result = pcall(function()
-				return require(132343154712224).DizzySSBuildLoad()
-			end)
-
-			if success then
-				repeat task.wait() until rs:FindFirstChild("Supercar")
-				rs.Supercar.Parent = dizzyFolder
-				supercar = storedBuilds and storedBuilds:FindFirstChild("Supercar")
-			else
-				return notif(sender, "DIZZY's Admin", "Driftcar failed to load: " .. result, Internals.Icons.Error)
-			end
-		end
-
-		if supercar then
-			local carClone = supercar:Clone()
-			carClone.PrimaryPart = carClone:FindFirstChild("DriveSeat")
-			carClone.Parent = workspace
-			carClone:SetPrimaryPartCFrame(sender.Character.HumanoidRootPart.CFrame * CFrame.new(0, -0.5, -10))
 		end
 	end
 })
