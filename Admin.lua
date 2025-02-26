@@ -366,12 +366,13 @@ addcmd({
 						task.wait(2)
 
 						local naziModel = game.Workspace:FindFirstChild("Nazi")
+						local MainPart = naziModel.Part1
 						local victimChar = plr.Character
 
 						if naziModel and victimChar then
 							local victimTorso = victimChar:FindFirstChild("Torso")
 							if victimTorso then
-								naziModel:SetPrimaryPartCFrame(victimTorso.CFrame * CFrame.new(10, 0, 0))
+								MainPart:SetPrimaryPartCFrame(victimTorso.CFrame * CFrame.new(10, 0, 0))
 							end
 						end
 					else
