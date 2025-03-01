@@ -7,7 +7,8 @@ local Settings = {
 		"neve11591",
 		"SirKhalidBlox",
 		"ripcxo",
-		"RUBYMEEEEMEEE"
+		"RUBYMEEEEMEEE",
+		"dhsjzjxhsjs"
 	};
 
 	DeadMansSwitch = false; -- If u get kicked or banned the server gets killed.
