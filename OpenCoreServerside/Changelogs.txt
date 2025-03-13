@@ -1,3 +1,3 @@
 [!] - Release!
 
-[+] - Plenty of scripts updated to the latest versions!
+[+] - Added AdminPanel Tab
