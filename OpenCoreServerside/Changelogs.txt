@@ -1,3 +1,0 @@
-[!] - Release!
-
-[+] - Added AdminPanel Tab
